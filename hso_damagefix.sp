@@ -17,14 +17,13 @@ public Plugin myinfo =
 public void OnPluginStart()
 {
 	ConVar HSO = FindConVar("mp_damage_headshot_only");
-	if (HSO)
+	if (!HSO)
 	{
-		HSO.AddChangeHook(Hook_HSO);
-		if (HSO.BoolValue)
-		{
-			b_HSO = true;
-		}
+		SetFailState("Could not find required cvar 'mp_damage_headshot_only'");
 	}
+	
+	HSO.AddChangeHook(Hook_HSO);
+	b_HSO = HSO.BoolValue;
 	
 	for (int i = 1; i <= MaxClients; i++) // useful if plugin gets reloaded
 	{
