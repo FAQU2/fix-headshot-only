@@ -61,7 +61,7 @@ public Action Hook_TakeDamage(int victim, int& attacker, int& inflictor, float& 
 
 bool IsWeaponKnife(int weapon)
 {
-	char classname[256];
-	GetEntityClassname(weapon, classname, sizeof(classname));
-	return StrEqual(classname, "weapon_knife");
+	char netclass[256];
+	GetEntityNetClass(weapon, netclass, sizeof(netclass));
+	return strncmp(netclass, "CKnife", 6, true) == 0;
 }
